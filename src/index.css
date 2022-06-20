@@ -5,7 +5,7 @@ body {
 }
 
 .GameArea-Container {
-	width: 820px;;
+	width: 820px;
 	height: 540px;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 14px;
@@ -21,6 +21,51 @@ body {
 
 .Header {
 	color: rgba(255, 220, 95, 1.0);
+	font-size: 18px;
 	text-align: center;
-	padding: 10px;
+	padding: 15px;
+}
+
+.GameBoard {
+	float: left;
+	width: fit-content;
+	height: fit-content;
+	color: white;
+	padding: 100px;
+}
+
+.button-slot {
+	font-size: 16px;
+	background-color: rgba(255, 220, 95, 1.0);
+	margin: 10px;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+}
+
+.Payout-Header {
+	color: white;
+	text-align: center;
+}
+
+.Payout-Content {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	padding-top: 10px;
+}
+
+.Payout-Content-Header {
+	color: slategrey;
+}
+
+.Payout-Column-Sum {
+	text-align: center;
+	list-style-type: none;
+	color:gold;
+}
+
+.Payout-Column-MGP {
+	text-align: center;
+	list-style-type: none;
+	color:white;
 }
