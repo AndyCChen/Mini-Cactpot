@@ -102,3 +102,9 @@ body {
 	height: 50px;
 	border-radius: 50%;
 }
+
+.selectSlotText {
+	text-align: center;
+	color: rgba(255, 215, 0, 0.8);
+	font-size: 18px;
+}

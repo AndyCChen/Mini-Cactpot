@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const Slots = ({ slotValue, isInitiallyRevealed }) => {
+const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed }) => {
 
    const [isSlotRevealed, setSlotStatus] = useState(isInitiallyRevealed);
 
+   //******************************************************* */
+   // FUNCTION
    // set slotIsRevealed
    const setIsSlotRevealed = () => {
       setSlotStatus(!isSlotRevealed);
+      updateSlotsRevealed();
    }
 
    return (
@@ -17,14 +20,15 @@ const Slots = ({ slotValue, isInitiallyRevealed }) => {
    )
 }
 
-Slots.defaultProps = {
+Slot.defaultProps = {
    slotValue: 0,
    isInitiallyRevealed: false,
 }
 
-Slots.propTypes = {
+Slot.propTypes = {
    slotValue: PropTypes.number,
    isInitiallyRevealed: PropTypes.bool,
+   updateSlotsRevealed: PropTypes.func,
 }
 
-export default Slots
+export default Slot
