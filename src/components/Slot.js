@@ -3,8 +3,6 @@ import { useState } from 'react';
 
 const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed }) => {
 
-   const [isSlotRevealed, setSlotStatus] = useState(isInitiallyRevealed);
-
    //******************************************************* */
    // FUNCTION
    // set slotIsRevealed
@@ -12,6 +10,8 @@ const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed }) => {
       setSlotStatus(!isSlotRevealed);
       updateSlotsRevealed();
    }
+
+   const [isSlotRevealed, setSlotStatus] = useState(isInitiallyRevealed);
 
    return (
       <button className='button-slot' onClick={setIsSlotRevealed} style={{ color: isSlotRevealed ? 'black' : '#FFDC5F'}}>

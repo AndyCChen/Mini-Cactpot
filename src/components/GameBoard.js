@@ -35,12 +35,6 @@ const GameBoard = () => {
       return Math.floor(Math.random() * 9) + 1;
    }
 
-   // randomSlot decides which slot is initally revealed and start of the game
-   const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
-
-   // initialize number of slotsRevealed by user to be 0
-   const [slotsRevealed, setSlotsReveals] = useState(0);
-
    //******************************************************* */
    // FUNCTION
    // increment slotsRevealed each time a slot is clicked, function
@@ -48,6 +42,12 @@ const GameBoard = () => {
    const updateSlotsRevealed = () => {
       setSlotsReveals(slotsRevealed + 1);
    }
+
+   // randomSlot decides which slot is initally revealed and start of the game
+   const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
+
+   // initialize number of slotsRevealed by user to be 0
+   const [slotsRevealed, setSlotsReveals] = useState(0);
 
    // array of random slot values 1-9 to be assigned to each slot
    const [slotValuesArray, setSlotValuesArray] = useState(generateRandomSlotValues());
