@@ -40,14 +40,29 @@ const GameBoard = () => {
    // increment slotsRevealed each time a slot is clicked, function
    // is passed into Slot component as prop
    const updateSlotsRevealed = () => {
-      setSlotsReveals(slotsRevealed + 1);
+      setSlotsReveals(slotsRevealed - 1);
+   }
+
+   //******************************************************* */
+   // FUNCTION
+   // returns three, two, or one based on number of slotsRevealed
+   const getBottomHelperText = (slotsRevealedCount) => {
+      if (slotsRevealedCount === 3) {
+         return 'Select three slots to uncover.';
+      } else if (slotsRevealedCount === 2) {
+         return 'Select two slots to uncover.';
+      } else if (slotsRevealedCount === 1){
+         return 'Select one slots to uncover.';
+      } else {
+         return 'Select a line to add up.';
+      }
    }
 
    // randomSlot decides which slot is initally revealed and start of the game
    const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
 
    // initialize number of slotsRevealed by user to be 0
-   const [slotsRevealed, setSlotsReveals] = useState(0);
+   const [slotsRevealed, setSlotsReveals] = useState(3);
 
    // array of random slot values 1-9 to be assigned to each slot
    const [slotValuesArray, setSlotValuesArray] = useState(generateRandomSlotValues());
@@ -83,7 +98,7 @@ const GameBoard = () => {
             <Slot slotValue={slotValuesArray[8]} isInitiallyRevealed={9 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
          </div>
 
-         <p className='selectSlotText'>{slotsRevealed}</p>
+         <p className='selectSlotText'>{getBottomHelperText(slotsRevealed)}</p>
       </div>
    )
 }
