@@ -37,15 +37,15 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // increment slotsRevealed each time a slot is clicked, function
+   // decrement slotsToBeRevealed each time a slot is clicked, function
    // is passed into Slot component as prop
    const updateSlotsRevealed = () => {
-      setSlotsReveals(slotsRevealed - 1);
+      setSlotsReveals(slotsToBeRevealed - 1);
    }
 
    //******************************************************* */
    // FUNCTION
-   // returns three, two, or one based on number of slotsRevealed
+   // returns a string based on how many remaining slots are allowed to be uncovered
    const getBottomHelperText = (slotsRevealedCount) => {
       if (slotsRevealedCount === 3) {
          return 'Select three slots to uncover.';
@@ -61,8 +61,8 @@ const GameBoard = () => {
    // randomSlot decides which slot is initally revealed and start of the game
    const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
 
-   // initialize number of slotsRevealed by user to be 0
-   const [slotsRevealed, setSlotsReveals] = useState(3);
+   // initialize number of slots allowed to be revealed by user to be 3
+   const [slotsToBeRevealed, setSlotsReveals] = useState(3);
 
    // array of random slot values 1-9 to be assigned to each slot
    const [slotValuesArray, setSlotValuesArray] = useState(generateRandomSlotValues());
@@ -79,26 +79,71 @@ const GameBoard = () => {
 
          <div>
             <RevealSlotSet nameOfClass='-start'/>
-            <Slot slotValue={slotValuesArray[0]} isInitiallyRevealed={1 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[1]} isInitiallyRevealed={2 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[2]} isInitiallyRevealed={3 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
+            <Slot 
+               slotValue={slotValuesArray[0]} 
+               isInitiallyRevealed={1 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[1]} 
+               isInitiallyRevealed={2 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[2]} 
+               isInitiallyRevealed={3 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
          </div>
 
          <div>
             <RevealSlotSet nameOfClass='-start'/>
-            <Slot slotValue={slotValuesArray[3]} isInitiallyRevealed={4 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[4]} isInitiallyRevealed={5 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[5]} isInitiallyRevealed={6 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
+            <Slot 
+               slotValue={slotValuesArray[3]} 
+               isInitiallyRevealed={4 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[4]} 
+               isInitiallyRevealed={5 === randomSlot ? true : false}
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[5]} 
+               isInitiallyRevealed={6 === randomSlot ? true : false}
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
          </div>
 
          <div>
             <RevealSlotSet nameOfClass='-start'/>
-            <Slot slotValue={slotValuesArray[6]} isInitiallyRevealed={7 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[7]} isInitiallyRevealed={8 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
-            <Slot slotValue={slotValuesArray[8]} isInitiallyRevealed={9 === randomSlot ? true : false} updateSlotsRevealed={updateSlotsRevealed}/>
+            <Slot 
+               slotValue={slotValuesArray[6]}
+               isInitiallyRevealed={7 === randomSlot ? true : false}
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[7]}
+               isInitiallyRevealed={8 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <Slot 
+               slotValue={slotValuesArray[8]}
+               isInitiallyRevealed={9 === randomSlot ? true : false} 
+               updateSlotsRevealed={updateSlotsRevealed}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
          </div>
 
-         <p className='selectSlotText'>{getBottomHelperText(slotsRevealed)}</p>
+         <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
       </div>
    )
 }
