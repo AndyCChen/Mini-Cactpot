@@ -1,7 +1,7 @@
 import './../components/Slots';
 import Slots from './../components/Slots';
 import RevealSlotSet from './RevealSlotSet';
-import { BsArrowDownRight, BsArrowDownLeft } from "react-icons/bs";
+import { BsArrowDownRight, BsArrowDownLeft, BsArrowDown } from "react-icons/bs";
 
 // generate random slot values 1-9 for each slot button
 const generateRandomSlotValues = () => {
@@ -33,9 +33,9 @@ const GameBoard = () => {
       <div className="GameBoard">
          <div>
             <RevealSlotSet nameOfClass='-start' icon={<BsArrowDownRight size={20}/>}/>
-            <RevealSlotSet />
-            <RevealSlotSet />
-            <RevealSlotSet />
+            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
+            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
+            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
             <RevealSlotSet nameOfClass='-end' icon={<BsArrowDownLeft size={20}/>}/>
          </div>
 
