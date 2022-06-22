@@ -58,6 +58,19 @@ const GameBoard = () => {
       }
    }
 
+   //******************************************************* */
+   // FUNCTION
+   // returns the sum of lineValues
+   const getSum = (lineValues) => {
+      let sum = 0;
+
+      lineValues.forEach(
+         (slotValue) => {sum += slotValue}
+      )
+
+      console.log(sum);
+   }
+
    // randomSlot decides which slot is initally revealed and start of the game
    const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
 
@@ -70,15 +83,47 @@ const GameBoard = () => {
    return (
       <div className="GameBoard">
          <div>
-            <RevealSlotSet nameOfClass='-start' icon={<BsArrowDownRight size={20}/>}/>
-            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
-            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
-            <RevealSlotSet icon={<BsArrowDown size={20}/>}/>
-            <RevealSlotSet nameOfClass='-end' icon={<BsArrowDownLeft size={20}/>}/>
+            <RevealSlotSet 
+               nameOfClass='-start' 
+               icon={<BsArrowDownRight size={20}/>} 
+               lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <RevealSlotSet
+               icon={<BsArrowDown size={20}/>}
+               lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <RevealSlotSet 
+               icon={<BsArrowDown size={20}/>}
+               lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <RevealSlotSet 
+               icon={<BsArrowDown size={20}/>}
+               lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
+            <RevealSlotSet
+               nameOfClass='-end' 
+               icon={<BsArrowDownLeft size={20}/>} 
+               lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
          </div>
 
          <div>
-            <RevealSlotSet nameOfClass='-start'/>
+            <RevealSlotSet 
+            nameOfClass='-start' 
+            lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
+            getSum={getSum}
+            slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
             <Slot 
                slotValue={slotValuesArray[0]} 
                isInitiallyRevealed={1 === randomSlot ? true : false} 
@@ -100,7 +145,12 @@ const GameBoard = () => {
          </div>
 
          <div>
-            <RevealSlotSet nameOfClass='-start'/>
+            <RevealSlotSet 
+            nameOfClass='-start' 
+            lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
+            getSum={getSum}
+            slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
             <Slot 
                slotValue={slotValuesArray[3]} 
                isInitiallyRevealed={4 === randomSlot ? true : false} 
@@ -122,7 +172,12 @@ const GameBoard = () => {
          </div>
 
          <div>
-            <RevealSlotSet nameOfClass='-start'/>
+            <RevealSlotSet
+               nameOfClass='-start' 
+               lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+            />
             <Slot 
                slotValue={slotValuesArray[6]}
                isInitiallyRevealed={7 === randomSlot ? true : false}
