@@ -71,6 +71,13 @@ const GameBoard = () => {
       console.log(sum);
    }
 
+   //******************************************************* */
+   // FUNCTION
+   // toggle the bool state of toggleSlots
+   const updateToggleSlots = () => {
+      setToggleSlots(true);
+   }
+
    // randomSlot decides which slot is initally revealed and start of the game
    const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
 
@@ -79,6 +86,9 @@ const GameBoard = () => {
 
    // array of random slot values 1-9 to be assigned to each slot
    const [slotValuesArray, setSlotValuesArray] = useState(generateRandomSlotValues());
+
+   // bool that toggles if slot is covered or uncovered
+   const [toggleSlotState, setToggleSlots] = useState(false);
 
    return (
       <div className="GameBoard">
@@ -89,24 +99,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet
                nameOfClass='-end' 
@@ -114,60 +128,69 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
          </div>
 
          <div>
             <RevealSlotSet 
-            nameOfClass='-start' 
-            lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
-            getSum={getSum}
-            slotsLeftToBeRevealed={slotsToBeRevealed}
+               nameOfClass='-start' 
+               lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[0]} 
                isInitiallyRevealed={1 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[1]} 
                isInitiallyRevealed={2 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[2]} 
                isInitiallyRevealed={3 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
          </div>
 
          <div>
             <RevealSlotSet 
-            nameOfClass='-start' 
-            lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
-            getSum={getSum}
-            slotsLeftToBeRevealed={slotsToBeRevealed}
+               nameOfClass='-start' 
+               lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
+               getSum={getSum}
+               slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[3]} 
                isInitiallyRevealed={4 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[4]} 
                isInitiallyRevealed={5 === randomSlot ? true : false}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[5]} 
                isInitiallyRevealed={6 === randomSlot ? true : false}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
          </div>
 
@@ -177,24 +200,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[6]}
                isInitiallyRevealed={7 === randomSlot ? true : false}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[7]}
                isInitiallyRevealed={8 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
             <Slot 
                slotValue={slotValuesArray[8]}
                isInitiallyRevealed={9 === randomSlot ? true : false} 
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               toggleSlot={toggleSlotState}
             />
          </div>
 
