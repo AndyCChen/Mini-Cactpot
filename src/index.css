@@ -6,7 +6,7 @@ body {
 
 .GameArea-Container {
 	width: 820px;
-	height: 540px;
+	height: 580px;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 14px;
 
@@ -40,6 +40,74 @@ body {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
+	border-style: solid;
+}
+
+.button-slot:hover {
+	border-color: #0066ff;
+	transition: 0.5s;
+}
+
+.button-RevealSlotSet {
+	margin: 25px;
+	color: white;
+	border-color: white;
+	border-style: solid;
+	background-color: rgba(0, 0, 0, 0.0);
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.button-RevealSlotSet:hover {
+	border-color: goldenrod;
+	transition: 0.5s;
+}
+
+.button-RevealSlotSet-end {
+	margin: 10px;
+	color: white;
+	border-color: white;
+	border-style: solid;
+	background-color: rgba(0, 0, 0, 0.0);
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.button-RevealSlotSet-end:hover {
+	border-color: goldenrod;
+	transition: 0.5s;
+}
+
+.button-RevealSlotSet-start {
+	margin: 10px;
+	color: white;
+	border-color: white;
+	border-style: solid;
+	background-color: rgba(0, 0, 0, 0.0);
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.button-RevealSlotSet-start:hover {
+	border-color: goldenrod;
+	transition: 0.5s;
+}
+
+.button-Confirm {
+	color: whitesmoke;
+	padding: 8px;
+	border-color: slategrey;
+	border-style: solid;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.button-Confirm:hover {
+	background-color: black;
+	transition: 0.7s;
 }
 
 .Payout-Header {
@@ -68,39 +136,6 @@ body {
 	text-align: center;
 	list-style-type: none;
 	color:white;
-}
-
-.button-RevealSlotSet {
-	margin: 25px;
-	color: white;
-	border-color: white;
-	border-style: solid;
-	background-color: rgba(0, 0, 0, 0.0);
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-}
-
-.button-RevealSlotSet-end {
-	margin: 10px;
-	color: white;
-	border-color: white;
-	border-style: solid;
-	background-color: rgba(0, 0, 0, 0.0);
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-}
-
-.button-RevealSlotSet-start {
-	margin: 10px;
-	color: white;
-	border-color: white;
-	border-style: solid;
-	background-color: rgba(0, 0, 0, 0.0);
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
 }
 
 .selectSlotText {
