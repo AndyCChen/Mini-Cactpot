@@ -27,10 +27,10 @@ const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed, slotsLeftTo
 }
 
 Slot.propTypes = {
-   slotValue: PropTypes.number,
-   isInitiallyRevealed: PropTypes.bool,
-   updateSlotsRevealed: PropTypes.func,
-   slotsLeftToBeRevealed: PropTypes.number,
+   slotValue: PropTypes.number.isRequired,
+   isInitiallyRevealed: PropTypes.bool.isRequired,
+   updateSlotsRevealed: PropTypes.func.isRequired,
+   slotsLeftToBeRevealed: PropTypes.number.isRequired,
 }
 
 export default Slot
