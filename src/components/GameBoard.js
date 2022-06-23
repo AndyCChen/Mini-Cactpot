@@ -1,5 +1,6 @@
 import Slot from './Slot';
 import RevealSlotSet from './RevealSlotSet';
+import ConfirmButton from './ConfirmButton';
 import { BsArrowDownRight, BsArrowDownLeft, BsArrowDown } from "react-icons/bs";
 import { useState } from 'react';
 
@@ -99,28 +100,24 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <RevealSlotSet
                nameOfClass='-end' 
@@ -128,7 +125,6 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
          </div>
 
@@ -138,7 +134,6 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[0]} 
@@ -169,7 +164,6 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[3]} 
@@ -200,7 +194,6 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               uncoverAllSlots={updateToggleSlots}
             />
             <Slot 
                slotValue={slotValuesArray[6]}
@@ -226,6 +219,8 @@ const GameBoard = () => {
          </div>
 
          <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
+
+         {slotsToBeRevealed === 0 && <ConfirmButton revealAllSlots={updateToggleSlots}/>}
       </div>
    )
 }

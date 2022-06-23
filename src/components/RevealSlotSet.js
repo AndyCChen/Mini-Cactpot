@@ -1,7 +1,7 @@
 import { BsArrowRight } from "react-icons/bs";
 import PropTypes from 'prop-types';
 
-const RevealSlotSet = ({ nameOfClass, icon, lineValues, slotsLeftToBeRevealed, getSum, uncoverAllSlots }) => {
+const RevealSlotSet = ({ nameOfClass, icon, lineValues, slotsLeftToBeRevealed, getSum }) => {
 
    //******************************************************* */
    // FUNCTION
@@ -14,7 +14,6 @@ const RevealSlotSet = ({ nameOfClass, icon, lineValues, slotsLeftToBeRevealed, g
       }
 
       getSum(lineValues);
-      uncoverAllSlots();
    }
 
    return (
@@ -32,9 +31,8 @@ RevealSlotSet.defaultProps = {
 RevealSlotSet.propTypes = {
    nameofClass: PropTypes.string,
    lineValues: PropTypes.array.isRequired,
-   slotsLeftToBeRevealed: PropTypes.number,
+   slotsLeftToBeRevealed: PropTypes.number.isRequired,
    getSum: PropTypes.func.isRequired,
-   uncoverAllSlots: PropTypes.func.isRequired,
 }
 
 export default RevealSlotSet
