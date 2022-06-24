@@ -1,5 +1,4 @@
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 
@@ -15,15 +14,22 @@ const ConfirmButton = ({ revealAllSlots, sum }) => {
 
 	return (
 		<div style={{ textAlign: 'center'}}>
-			<button className="button-Confirm" onClick={onClickFunction}>
+			<button className='button-Confirm' onClick={onClickFunction} >
 				Confirm
 			</button>
-			<Popup open={open} closeOnDocumentClick={true} onClose={closeModal}>
-				<div className="modal">
+
+			<Popup open={open} onClose={closeModal} >
+				<button className='popup-close-button' onClick={closeModal}>
+					&times;
+				</button>
+				<div className='popup-header'>
+					MGP Payout
+				</div>
+				<div style={{ textAlign: 'center'}}>
 					{sum}
 				</div>
 			</Popup>
-    </div>
+		</div>
 	)
 }
 

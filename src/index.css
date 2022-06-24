@@ -34,6 +34,7 @@ body {
 }
 
 .button-slot {
+	cursor: pointer;
 	font-size: 16px;
 	background-color: rgba(255, 220, 95, 1.0);
 	margin: 10px;
@@ -49,6 +50,7 @@ body {
 }
 
 .button-RevealSlotSet {
+	cursor: pointer;
 	margin: 25px;
 	color: white;
 	border-color: white;
@@ -65,6 +67,7 @@ body {
 }
 
 .button-RevealSlotSet-end {
+	cursor: pointer;
 	margin: 10px;
 	color: white;
 	border-color: white;
@@ -81,6 +84,7 @@ body {
 }
 
 .button-RevealSlotSet-start {
+	cursor: pointer;
 	margin: 10px;
 	color: white;
 	border-color: white;
@@ -97,6 +101,7 @@ body {
 }
 
 .button-Confirm {
+	cursor: pointer;
 	color: whitesmoke;
 	padding: 8px;
 	border-color: slategrey;
@@ -142,4 +147,73 @@ body {
 	text-align: center;
 	color: rgba(255, 215, 0, 0.8);
 	font-size: 18px;
+}
+
+@keyframes anvil {
+	0% {
+	  transform: scale(1) translateY(0px);
+	  opacity: 0;
+	  box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+	}
+	1% {
+	  transform: scale(0.96) translateY(10px);
+	  opacity: 0;
+	  box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+	}
+	100% {
+	  transform: scale(1) translateY(0px);
+	  opacity: 1;
+	  box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+	}
+ }
+ .popup-content {
+	-webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+ }
+
+ .popup-content {
+	font-size: 25px;
+	color: white;
+	background: #292d3e;
+	width: fit-content;
+	padding: 20px;
+	border-radius: 15px;
+	border: solid white 1px
+ }
+ .popup-arrow {
+	color: rgb(255, 255, 255);
+ }
+ [role='tooltip'].popup-content {
+	width: 200px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+ }
+ 
+ .popup-overlay {
+	background: rgba(0, 0, 0, 0.5);
+ }
+ [data-popup='tooltip'].popup-overlay {
+	background: transparent;
+ }
+
+ .popup-header {
+	color: white;
+	border-bottom: white solid 1px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+ }
+
+.popup-close-button {
+	cursor: pointer;
+	position: absolute;
+	display: block;
+	right: -10px;
+	top: -10px;
+	font-size: 25px;
+	border: none;
+	border-radius: 10px;
+}
+
+.popup-close-button:hover {
+	color: white;
+	background-color: #ff6c3b;
+	transition: 0.5s;
 }
