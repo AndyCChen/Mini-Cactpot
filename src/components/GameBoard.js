@@ -69,7 +69,29 @@ const GameBoard = () => {
          (slotValue) => {sum += slotValue}
       )
 
-      console.log(sum);
+      const payout = {
+         6: '10,000',
+         7: '36',
+         8: '720',
+         9: '360',
+         10: '80',
+         11: '252',
+         12: '108',
+         13: '72',
+         14: '54',
+         15: '180',
+         16: '72',
+         17: '180',
+         18: '119',
+         19: '36',
+         20: '306',
+         21: '1,080',
+         22: '144',
+         23: '1,800',
+         24: '3,600',
+      }
+
+      setSum(payout[sum]);
    }
 
    //******************************************************* */
@@ -90,6 +112,9 @@ const GameBoard = () => {
 
    // bool that toggles if slot is covered or uncovered
    const [toggleSlotState, setToggleSlots] = useState(false);
+
+   // sum of the line chosen by user
+   const [mgpSum, setSum] = useState(0);
 
    return (
       <div className="GameBoard">
@@ -220,7 +245,7 @@ const GameBoard = () => {
 
          <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
 
-         {slotsToBeRevealed === 0 && <ConfirmButton revealAllSlots={updateToggleSlots}/>}
+         {slotsToBeRevealed === 0 && <ConfirmButton revealAllSlots={updateToggleSlots} sum={mgpSum}/>}
       </div>
    )
 }
