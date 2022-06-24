@@ -116,6 +116,9 @@ const GameBoard = () => {
    // sum of the line chosen by user
    const [mgpSum, setSum] = useState(0);
 
+   // bool for controlling if confirm button is to be shown or not
+   const [showReveal, setShowReveal] = useState(false);
+
    return (
       <div className="GameBoard">
          <div>
@@ -125,24 +128,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <RevealSlotSet 
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <RevealSlotSet
                nameOfClass='-end' 
@@ -150,6 +157,7 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
          </div>
 
@@ -159,6 +167,7 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <Slot 
                slotValue={slotValuesArray[0]} 
@@ -189,6 +198,7 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <Slot 
                slotValue={slotValuesArray[3]} 
@@ -219,6 +229,7 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
+               setShowConfirm={setShowReveal}
             />
             <Slot 
                slotValue={slotValuesArray[6]}
@@ -245,7 +256,7 @@ const GameBoard = () => {
 
          <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
 
-         {slotsToBeRevealed === 0 && <ConfirmButton revealAllSlots={updateToggleSlots} sum={mgpSum}/>}
+         {showReveal && <ConfirmButton revealAllSlots={updateToggleSlots} sum={mgpSum.toString()}/>}
       </div>
    )
 }
