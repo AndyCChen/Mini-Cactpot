@@ -1,26 +1,24 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed, slotsLeftToBeRevealed, toggleSlot}) => {
+const Slot = ({ slotValue, isVisible, setSelector, updateSlotsRevealed, slotsLeftToBeRevealed, toggleSlot }) => {
 
    //******************************************************* */
    // FUNCTION
    // if number of slots left to reveal is 0 or isSlotRevealed is true return nothing
    // else uncover the slot and updateSlotsRevealed()
-   const setIsSlotRevealed = () => {
+   const revealSlot = () => {
 
-      if (slotsLeftToBeRevealed === 0 || isSlotRevealed) {
+      if (slotsLeftToBeRevealed === 0 || isVisible) {
          return;
       }
 
-      setSlotStatus(!isSlotRevealed);
+      setSelector(slotValue);
       updateSlotsRevealed();
    }
 
-   const [isSlotRevealed, setSlotStatus] = useState(isInitiallyRevealed);
-
    return (
-      <button className='button-slot' onClick={setIsSlotRevealed} style={{ color: isSlotRevealed || toggleSlot ? 'black' : '#FFDC5F'}}>
+      <button className='button-slot' onClick={revealSlot} style={{ color: isVisible || toggleSlot ? 'black' : '#FFDC5F'}}>
          {slotValue}
       </button>
    )
@@ -28,7 +26,7 @@ const Slot = ({ slotValue, isInitiallyRevealed, updateSlotsRevealed, slotsLeftTo
 
 Slot.propTypes = {
    slotValue: PropTypes.number.isRequired,
-   isInitiallyRevealed: PropTypes.bool.isRequired,
+   isVisible: PropTypes.bool.isRequired,
    updateSlotsRevealed: PropTypes.func.isRequired,
    slotsLeftToBeRevealed: PropTypes.number.isRequired,
 }

@@ -96,13 +96,39 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // toggle the bool state of toggleSlots
-   const updateToggleSlots = () => {
-      setToggleSlots(true);
+   // resets gameboard with new randomized values & all slots covered
+   const resetGameBoard = () => {
+      // reset toggleSlots state
+      setToggleSlots(false);
+
+      // reset selector
+      setSelector(0);
+
+      // cover all slots
+      setCoverAllSlots(true);
+
+      // set slotsToBeRevealed back to inital value of 3
+      setSlotsReveals(3);
+
+      // new array of shuffled slot values
+      setSlotValuesArray(generateRandomSlotValues());
+
+      // choose new randomSlot to be initially revealed
+      setRandomSlot(chooseRandomSlot());
+
+      // hide confirm button
+      setShowReveal(false);
+   }
+
+   //******************************************************* */
+   // FUNCTION
+   // sets the value of selector based on slot button's value
+   const setSelectorFunc = (value) => {
+      setSelector(value);
    }
 
    // randomSlot decides which slot is initally revealed and start of the game
-   const [randomSlot, getRandomSlot] = useState(chooseRandomSlot());
+   const [randomSlot, setRandomSlot] = useState(chooseRandomSlot());
 
    // initialize number of slots allowed to be revealed by user to be 3
    const [slotsToBeRevealed, setSlotsReveals] = useState(3);
@@ -119,12 +145,18 @@ const GameBoard = () => {
    // bool for controlling if confirm button is to be shown or not
    const [showReveal, setShowReveal] = useState(false);
 
+   // bool for covering all slots
+   const [coverAllSlots, setCoverAllSlots] = useState(false);
+
+   // int selector for choosing which slot button to update visibility
+   const [selector, setSelector] = useState(0);
+
    return (
       <div className="GameBoard">
          <div>
-            <RevealSlotSet 
-               nameOfClass='-start' 
-               icon={<BsArrowDownRight size={20}/>} 
+            <RevealSlotSet
+               nameOfClass='-start'
+               icon={<BsArrowDownRight size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
@@ -137,14 +169,14 @@ const GameBoard = () => {
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
-            <RevealSlotSet 
+            <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
-            <RevealSlotSet 
+            <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
@@ -152,111 +184,119 @@ const GameBoard = () => {
                setShowConfirm={setShowReveal}
             />
             <RevealSlotSet
-               nameOfClass='-end' 
-               icon={<BsArrowDownLeft size={20}/>} 
+               nameOfClass='-end'
+               icon={<BsArrowDownLeft size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
          </div>
-
          <div>
-            <RevealSlotSet 
-               nameOfClass='-start' 
+            <RevealSlotSet
+               nameOfClass='-start'
                lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
-            <Slot 
-               slotValue={slotValuesArray[0]} 
-               isInitiallyRevealed={1 === randomSlot ? true : false} 
+            <Slot
+               slotValue={slotValuesArray[0]}
+               isVisible={coverAllSlots ? false : (1 === randomSlot ? true : (slotValuesArray[0] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
-               slotValue={slotValuesArray[1]} 
-               isInitiallyRevealed={2 === randomSlot ? true : false} 
+            <Slot
+               slotValue={slotValuesArray[1]}
+               isVisible={coverAllSlots ? false : (2 === randomSlot ? true : (slotValuesArray[1] === selector && true))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
-               slotValue={slotValuesArray[2]} 
-               isInitiallyRevealed={3 === randomSlot ? true : false} 
+            <Slot
+               slotValue={slotValuesArray[2]}
+               isVisible={coverAllSlots ? false : (3 === randomSlot ? true : (slotValuesArray[2] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
          </div>
-
          <div>
-            <RevealSlotSet 
-               nameOfClass='-start' 
+            <RevealSlotSet
+               nameOfClass='-start'
                lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
-            <Slot 
-               slotValue={slotValuesArray[3]} 
-               isInitiallyRevealed={4 === randomSlot ? true : false} 
+            <Slot
+               slotValue={slotValuesArray[3]}
+               isVisible={coverAllSlots ? false : (4 === randomSlot ? true : (slotValuesArray[3] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
-               slotValue={slotValuesArray[4]} 
-               isInitiallyRevealed={5 === randomSlot ? true : false}
+            <Slot
+               slotValue={slotValuesArray[4]}
+               isVisible={coverAllSlots ? false : (5 === randomSlot ? true : (slotValuesArray[4] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
-               slotValue={slotValuesArray[5]} 
-               isInitiallyRevealed={6 === randomSlot ? true : false}
+            <Slot
+               slotValue={slotValuesArray[5]}
+               isVisible={coverAllSlots ? false : (6 === randomSlot ? true : (slotValuesArray[5] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
          </div>
-
          <div>
             <RevealSlotSet
-               nameOfClass='-start' 
+               nameOfClass='-start'
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowReveal}
             />
-            <Slot 
+            <Slot
                slotValue={slotValuesArray[6]}
-               isInitiallyRevealed={7 === randomSlot ? true : false}
+               isVisible={coverAllSlots ? false : (7 === randomSlot ? true : (slotValuesArray[6] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
+            <Slot
                slotValue={slotValuesArray[7]}
-               isInitiallyRevealed={8 === randomSlot ? true : false} 
+               isVisible={coverAllSlots ? false : (8 === randomSlot ? true : (slotValuesArray[7] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
-            <Slot 
+            <Slot
                slotValue={slotValuesArray[8]}
-               isInitiallyRevealed={9 === randomSlot ? true : false} 
+               isVisible={coverAllSlots ? false : (9 === randomSlot ? true : (slotValuesArray[8] === selector ? true : false))}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                toggleSlot={toggleSlotState}
+               setSelector={setSelectorFunc}
             />
          </div>
 
          <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
 
-         {showReveal && <ConfirmButton revealAllSlots={updateToggleSlots} sum={mgpSum.toString()}/>}
+         {showReveal && 
+            <ConfirmButton setToggleSlots={setToggleSlots} sum={mgpSum.toString()} resetGameBoard={resetGameBoard}/>
+         }
       </div>
    )
 }
