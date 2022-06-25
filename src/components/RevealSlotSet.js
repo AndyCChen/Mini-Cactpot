@@ -6,7 +6,7 @@ const RevealSlotSet = ({ nameOfClass, icon, lineValues, slotsLeftToBeRevealed, g
    //******************************************************* */
    // FUNCTION
    // return nothing if user has not selected 3 slots yet
-   // else call getSum
+   // else call getSum and setShowConfirm to show confirm button
    const callGetSum = () => {
 
       if (slotsLeftToBeRevealed !== 0) {
