@@ -2,14 +2,14 @@ import Popup from 'reactjs-popup';
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 
-const ConfirmButton = ({ setToggleSlots, sum, resetGameBoard }) => {
+const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
  	const closeModal = () => {
 		setIsReset(true);
 		setOpen(false)
 	};
 
-	const onClickFunction = () => {
-		setToggleSlots(true);
+	const confirm = () => {
+		revealAllSlots();
 		setOpen(!open);
 	}
 
@@ -26,7 +26,7 @@ const ConfirmButton = ({ setToggleSlots, sum, resetGameBoard }) => {
 
 	return (
 		<div style={{ textAlign: 'center'}}>
-			<button className='button-Confirm' onClick={isReset ? replay : onClickFunction } >
+			<button className='button-Confirm' onClick={isReset ? replay : confirm } >
 				{isReset ? 'Replay' : 'Confirm'}
 			</button>
 
@@ -46,8 +46,9 @@ const ConfirmButton = ({ setToggleSlots, sum, resetGameBoard }) => {
 }
 
 ConfirmButton.propTypes = {
-	setToggleSlots: PropTypes.func.isRequired,
-	sum: PropTypes.string,
+	sum: PropTypes.string.isRequired,
+	resetGameBoard: PropTypes.func.isRequired,
+	revealAllSlots: PropTypes.func.isRequired,
 }
 
 export default ConfirmButton

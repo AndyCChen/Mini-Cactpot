@@ -31,9 +31,9 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // pick one random slot to be revealed at the start of the game
+   // return number between 0 - 8
    const chooseRandomSlot = () => {
-      return Math.floor(Math.random() * 9) + 1;
+      return Math.floor(Math.random() * 9);
    }
 
    //******************************************************* */
@@ -61,7 +61,7 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // returns the sum of lineValues
+   // returns the mgp won based on the respective sum of lineValues chosen by user
    const getSum = (lineValues) => {
       let sum = 0;
 
@@ -96,39 +96,60 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // resets gameboard with new randomized values & all slots covered
+   // resets gameboard
    const resetGameBoard = () => {
-      // reset toggleSlots state
-      setToggleSlots(false);
+      // reset isVisible array to be all false with one random element set as true
+      setIsVisible(initIsVisibility());
 
-      // reset selector
-      setSelector(0);
-
-      // cover all slots
-      setCoverAllSlots(true);
-
-      // set slotsToBeRevealed back to inital value of 3
+      // reset slotsToBeRevealed back to inital value of 3
       setSlotsReveals(3);
 
-      // new array of shuffled slot values
+      // set a new array of shuffled slot values
       setSlotValuesArray(generateRandomSlotValues());
 
-      // choose new randomSlot to be initially revealed
-      setRandomSlot(chooseRandomSlot());
-
       // hide confirm button
-      setShowReveal(false);
+      setShowConfirm(false);
    }
 
    //******************************************************* */
    // FUNCTION
-   // sets the value of selector based on slot button's value
-   const setSelectorFunc = (value) => {
-      setSelector(value);
+   // creates initial array of all false values for isVisible property of slot button
+   const initIsVisibility = () => {
+      let array = Array.apply(null, Array(9)).map( (x) => { return false });
+
+      // choose one randome slot to be set to true
+      array[chooseRandomSlot()] = true;
+
+      return array;
    }
 
-   // randomSlot decides which slot is initally revealed and start of the game
-   const [randomSlot, setRandomSlot] = useState(chooseRandomSlot());
+   //******************************************************* */
+   // FUNCTION
+   // set visibility of a slot button that has been clicked
+   const setVisibility = (slotValue) => {
+      let array = [...isVisible];
+
+      // choose which array element is selected based on slot value
+      for (let i = 0; i < array.length; i++) {
+         if (slotValue ===  slotValuesArray[i]) {
+            array[i] = true;
+         }
+      }
+
+      setIsVisible(array);
+   }
+
+   //******************************************************* */
+   // FUNCTION
+   // update state of isVisible array with new array of booleans that are all true
+   const revealSlots = () => {
+      let array = Array.apply(null, Array(9)).map( (x) => { return true });
+
+      setIsVisible(array);
+   }
+
+   // array of bool for each slot button that controls the visibilty of the slot value
+   const [isVisible, setIsVisible] = useState(initIsVisibility());
 
    // initialize number of slots allowed to be revealed by user to be 3
    const [slotsToBeRevealed, setSlotsReveals] = useState(3);
@@ -136,20 +157,11 @@ const GameBoard = () => {
    // array of random slot values 1-9 to be assigned to each slot
    const [slotValuesArray, setSlotValuesArray] = useState(generateRandomSlotValues());
 
-   // bool that toggles if slot is covered or uncovered
-   const [toggleSlotState, setToggleSlots] = useState(false);
-
    // sum of the line chosen by user
    const [mgpSum, setSum] = useState(0);
 
    // bool for controlling if confirm button is to be shown or not
-   const [showReveal, setShowReveal] = useState(false);
-
-   // bool for covering all slots
-   const [coverAllSlots, setCoverAllSlots] = useState(false);
-
-   // int selector for choosing which slot button to update visibility
-   const [selector, setSelector] = useState(0);
+   const [showConfirm, setShowConfirm] = useState(false);
 
    return (
       <div className="GameBoard">
@@ -160,28 +172,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <RevealSlotSet
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <RevealSlotSet
                nameOfClass='-end'
@@ -189,7 +201,7 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
          </div>
          <div>
@@ -198,31 +210,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <Slot
                slotValue={slotValuesArray[0]}
-               isVisible={coverAllSlots ? false : (1 === randomSlot ? true : (slotValuesArray[0] === selector ? true : false))}
+               isVisible={isVisible[0]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[1]}
-               isVisible={coverAllSlots ? false : (2 === randomSlot ? true : (slotValuesArray[1] === selector && true))}
+               isVisible={isVisible[1]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[2]}
-               isVisible={coverAllSlots ? false : (3 === randomSlot ? true : (slotValuesArray[2] === selector ? true : false))}
+               isVisible={isVisible[2]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
          </div>
          <div>
@@ -231,31 +240,28 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <Slot
                slotValue={slotValuesArray[3]}
-               isVisible={coverAllSlots ? false : (4 === randomSlot ? true : (slotValuesArray[3] === selector ? true : false))}
+               isVisible={isVisible[3]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[4]}
-               isVisible={coverAllSlots ? false : (5 === randomSlot ? true : (slotValuesArray[4] === selector ? true : false))}
+               isVisible={isVisible[4]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[5]}
-               isVisible={coverAllSlots ? false : (6 === randomSlot ? true : (slotValuesArray[5] === selector ? true : false))}
+               isVisible={isVisible[5]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
          </div>
          <div>
@@ -264,39 +270,34 @@ const GameBoard = () => {
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               setShowConfirm={setShowReveal}
+               setShowConfirm={setShowConfirm}
             />
             <Slot
                slotValue={slotValuesArray[6]}
-               isVisible={coverAllSlots ? false : (7 === randomSlot ? true : (slotValuesArray[6] === selector ? true : false))}
+               isVisible={isVisible[6]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[7]}
-               isVisible={coverAllSlots ? false : (8 === randomSlot ? true : (slotValuesArray[7] === selector ? true : false))}
+               isVisible={isVisible[7]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
             <Slot
                slotValue={slotValuesArray[8]}
-               isVisible={coverAllSlots ? false : (9 === randomSlot ? true : (slotValuesArray[8] === selector ? true : false))}
+               isVisible={isVisible[8]}
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
-               toggleSlot={toggleSlotState}
-               setSelector={setSelectorFunc}
+               setIsVisible={setVisibility}
             />
          </div>
 
          <p className='selectSlotText'>{getBottomHelperText(slotsToBeRevealed)}</p>
 
-         {showReveal && 
-            <ConfirmButton setToggleSlots={setToggleSlots} sum={mgpSum.toString()} resetGameBoard={resetGameBoard}/>
-         }
+         {showConfirm && <ConfirmButton sum={mgpSum.toString()} resetGameBoard={resetGameBoard} revealAllSlots={revealSlots}/>}
       </div>
    )
 }
