@@ -1,14 +1,14 @@
 import { BsArrowRight } from "react-icons/bs";
 import PropTypes from 'prop-types';
 
-const RevealSlotSet = ({ id, nameOfClass, icon, lineValues, slotsLeftToBeRevealed, getSum, setShowConfirm, isHighlighted, setIsHighlighted, slotIndices }) => {
+const RevealSlotSet = ({ id, nameOfClass, icon, lineValues, slotsLeftToBeRevealed, getSum, setShowConfirm, isHighlighted, setIsHighlighted, slotIndices, isDisabled }) => {
 
    //******************************************************* */
    // FUNCTION
    // return nothing if user has not selected 3 slots yet
    const onClick = () => {
 
-      if (slotsLeftToBeRevealed !== 0) {
+      if (slotsLeftToBeRevealed !== 0 || isDisabled) {
          return;
       }
 

@@ -2,7 +2,7 @@ import Popup from 'reactjs-popup';
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 
-const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
+const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots, disableRevealButton }) => {
 
 	// close popup and change confirm button to reset button
  	const closeModal = () => {
@@ -13,6 +13,7 @@ const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
 	// when confirm button is clicked, show popup for prize results 
 	// and reveal all remaining slots
 	const confirm = () => {
+		disableRevealButton(true);
 		revealAllSlots();
 		setOpen(!open);
 	}
@@ -20,6 +21,7 @@ const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
 	// when replay button is pressed reset gameboard and change reset button
 	// back to confirm button
 	const replay = () => {
+		disableRevealButton(false);
 		resetGameBoard();
 		setIsReset(false);
 	}
