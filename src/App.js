@@ -5,7 +5,7 @@ import { BiLinkExternal } from 'react-icons/bi';
 function App() {
 	return (
 		<div>
-			<a className='github-button' href='https://github.com/AndyCChen/Mini-Cactpot' target='_blank'>
+			<a className='github-button' href='https://github.com/AndyCChen/Mini-Cactpot' target='noreferrer'>
 				GitHub
 				<BiLinkExternal size={20}/>
 			</a>
