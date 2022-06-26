@@ -98,6 +98,10 @@ const GameBoard = () => {
    // FUNCTION
    // resets gameboard
    const resetGameBoard = () => {
+      // remove highlight from revealSlot and slot buttons
+      setIsRevealSlotHighlighted(initIsVisibility(8, false));
+      setIsSlotHighlighted(initIsVisibility(9));
+
       // reset isVisible array to be all false with one random element set as true
       setIsVisible(initIsVisibility(9, true));
 
