@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Slot = ({ slotValue, isVisible, setIsVisible, updateSlotsRevealed, slotsLeftToBeRevealed }) => {
+const Slot = ({ slotValue, isVisible, setIsVisible, updateSlotsRevealed, slotsLeftToBeRevealed, isHighlighted }) => {
 
    //******************************************************* */
    // FUNCTION
@@ -17,7 +17,11 @@ const Slot = ({ slotValue, isVisible, setIsVisible, updateSlotsRevealed, slotsLe
    }
 
    return (
-      <button className='button-slot' onClick={revealSlot} style={{ color: isVisible ? 'black' : '#FFDC5F'}}>
+      <button 
+         className='button-slot' 
+         onClick={revealSlot} 
+         style={{ color: isVisible ? 'black' : '#FFDC5F', border: isHighlighted && 'solid red'}}
+      >
          {slotValue}
       </button>
    )

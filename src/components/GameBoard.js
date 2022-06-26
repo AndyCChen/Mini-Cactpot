@@ -99,7 +99,7 @@ const GameBoard = () => {
    // resets gameboard
    const resetGameBoard = () => {
       // reset isVisible array to be all false with one random element set as true
-      setIsVisible(initIsVisibility());
+      setIsVisible(initIsVisibility(9, true));
 
       // reset slotsToBeRevealed back to inital value of 3
       setSlotsReveals(3);
@@ -113,12 +113,14 @@ const GameBoard = () => {
 
    //******************************************************* */
    // FUNCTION
-   // creates initial array of all false values for isVisible property of slot button
-   const initIsVisibility = () => {
-      let array = Array.apply(null, Array(9)).map( (x) => { return false });
+   // creates array of all false values
+   const initIsVisibility = (length, isRandom) => {
+      let array = Array.apply(null, Array(length)).map( (x) => { return false });
 
-      // choose one randome slot to be set to true
-      array[chooseRandomSlot()] = true;
+      if (isRandom) {
+         // choose one randome slot to be set to true
+         array[chooseRandomSlot()] = true;
+      }
 
       return array;
    }
@@ -148,8 +150,34 @@ const GameBoard = () => {
       setIsVisible(array);
    }
 
+   //******************************************************* */
+   // FUNCTION
+   // highlight line that has been selected to be added up
+   // deselected previous line that was selected if any
+   const selectLine = (revealSlotButtonID, slotIndexOne, slotIndexTwo, slotIndexThree) => {
+      let revealArray = [...isRevealSlotHighlighted];
+      let slotArray = [...isSlotHighlighted];
+
+      revealArray.fill(false);
+      slotArray.fill(false);
+
+      revealArray[revealSlotButtonID] = true;
+      slotArray[slotIndexOne] = true;
+      slotArray[slotIndexTwo] = true;
+      slotArray[slotIndexThree] = true;
+
+      setIsSlotHighlighted(slotArray);
+      setIsRevealSlotHighlighted(revealArray);
+   }
+
    // array of bool for each slot button that controls the visibilty of the slot value
-   const [isVisible, setIsVisible] = useState(initIsVisibility());
+   const [isVisible, setIsVisible] = useState(initIsVisibility(9, true));
+
+   // array of bool for each revealSlotButton for if it is highlighted or not
+   const [isRevealSlotHighlighted, setIsRevealSlotHighlighted] = useState(initIsVisibility(8, false))
+
+   // array of bool to highlight line of slots chosen by user to be added up
+   const [isSlotHighlighted, setIsSlotHighlighted] = useState(initIsVisibility(9, false));
 
    // initialize number of slots allowed to be revealed by user to be 3
    const [slotsToBeRevealed, setSlotsReveals] = useState(3);
@@ -167,50 +195,74 @@ const GameBoard = () => {
       <div className="GameBoard">
          <div>
             <RevealSlotSet
+               id={0}
                nameOfClass='-start'
                icon={<BsArrowDownRight size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[4], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[0]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [0, 4, 8]}
             />
             <RevealSlotSet
+               id={1}
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[0], slotValuesArray[3], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[1]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [0, 3, 6]}
             />
             <RevealSlotSet
+               id={2}
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[1], slotValuesArray[4], slotValuesArray[7]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[2]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [1, 4, 7]}
             />
             <RevealSlotSet
+               id={3}
                icon={<BsArrowDown size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[5], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[3]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [2, 5, 8]}
             />
             <RevealSlotSet
+               id={4}
                nameOfClass='-end'
                icon={<BsArrowDownLeft size={20}/>}
                lineValues={ [slotValuesArray[2], slotValuesArray[4], slotValuesArray[6]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[4]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [2, 4, 6]}
             />
          </div>
          <div>
             <RevealSlotSet
+               id={5}
                nameOfClass='-start'
                lineValues={ [slotValuesArray[0], slotValuesArray[1], slotValuesArray[2]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[5]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [0, 1, 2]}
             />
             <Slot
                slotValue={slotValuesArray[0]}
@@ -218,6 +270,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[0]}
             />
             <Slot
                slotValue={slotValuesArray[1]}
@@ -225,6 +278,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[1]}
             />
             <Slot
                slotValue={slotValuesArray[2]}
@@ -232,15 +286,20 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[2]}
             />
          </div>
          <div>
             <RevealSlotSet
+               id={6}
                nameOfClass='-start'
                lineValues={ [slotValuesArray[3], slotValuesArray[4], slotValuesArray[5]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[6]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [3, 4, 5]}
             />
             <Slot
                slotValue={slotValuesArray[3]}
@@ -248,6 +307,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[3]}
             />
             <Slot
                slotValue={slotValuesArray[4]}
@@ -255,6 +315,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[4]}
             />
             <Slot
                slotValue={slotValuesArray[5]}
@@ -262,15 +323,20 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[5]}
             />
          </div>
          <div>
             <RevealSlotSet
+               id={7}
                nameOfClass='-start'
                lineValues={ [slotValuesArray[6], slotValuesArray[7], slotValuesArray[8]] }
                getSum={getSum}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setShowConfirm={setShowConfirm}
+               isHighlighted={isRevealSlotHighlighted[7]}
+               setIsHighlighted={selectLine}
+               slotIndices= { [6, 7, 8]}
             />
             <Slot
                slotValue={slotValuesArray[6]}
@@ -278,6 +344,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[6]}
             />
             <Slot
                slotValue={slotValuesArray[7]}
@@ -285,6 +352,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[7]}
             />
             <Slot
                slotValue={slotValuesArray[8]}
@@ -292,6 +360,7 @@ const GameBoard = () => {
                updateSlotsRevealed={updateSlotsRevealed}
                slotsLeftToBeRevealed={slotsToBeRevealed}
                setIsVisible={setVisibility}
+               isHighlighted={isSlotHighlighted[8]}
             />
          </div>
 
