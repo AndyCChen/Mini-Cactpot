@@ -217,3 +217,24 @@ body {
 	background-color: #ff6c3b;
 	transition: 0.5s;
 }
+
+.github-button {
+	font-size: 25px;
+	font-family:'Times New Roman', Times, serif;
+	margin: 10px;
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	color: whitesmoke;
+	padding: 8px;
+	border-color: slategrey;
+	border-style: solid;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	text-decoration: none;
+}
+
+.github-button:hover {
+	background-color: slategray;
+	transition: 0.7s;
+}
