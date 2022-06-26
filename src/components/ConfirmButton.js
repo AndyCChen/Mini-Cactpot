@@ -3,16 +3,22 @@ import PropTypes from 'prop-types'
 import { useState } from 'react';
 
 const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
+
+	// close popup and change confirm button to reset button
  	const closeModal = () => {
 		setIsReset(true);
 		setOpen(false)
 	};
 
+	// when confirm button is clicked, show popup for prize results 
+	// and reveal all remaining slots
 	const confirm = () => {
 		revealAllSlots();
 		setOpen(!open);
 	}
 
+	// when replay button is pressed reset gameboard and change reset button
+	// back to confirm button
 	const replay = () => {
 		resetGameBoard();
 		setIsReset(false);
@@ -35,7 +41,7 @@ const ConfirmButton = ({ sum, resetGameBoard, revealAllSlots }) => {
 					&times;
 				</button>
 				<div className='popup-header'>
-					MGP Payout
+					MGP Prize
 				</div>
 				<div style={{ textAlign: 'center'}}>
 					{sum}
